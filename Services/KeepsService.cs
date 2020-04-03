@@ -6,21 +6,65 @@ using Keepr.Repositories;
 
 namespace Keepr.Services
 {
-    public class KeepsService
+  public class KeepsService
+  {
+    private readonly KeepsRepository _repo;
+    public KeepsService(KeepsRepository repo)
     {
-        private readonly KeepsRepository _repo;
-        public KeepsService(KeepsRepository repo)
-        {
-            _repo = repo;
-        }
-        public IEnumerable<Keep> Get()
-        {
-            return _repo.Get();
-        }
-
-        public Keep Create(Keep newKeep)
-        {
-            return _repo.Create(newKeep);
-        }
+      _repo = repo;
     }
+    public IEnumerable<Keep> Get()
+    {
+      return _repo.Get();
+    }
+
+    public Keep Create(Keep newKeep)
+    {
+      return _repo.Create(newKeep);
+    }
+
+    public IEnumerable<Keep> GetUserKeeps(string userId)
+    {
+      return _repo.GetUserKeeps(userId);
+    }
+
+    public Keep Get(int id)
+    {
+      Keep found = _repo.Get(id);
+      if (found == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      return found;
+    }
+
+    public Keep Edit(Keepr updatedKeep)
+    {
+      Keep found = Get(updatedKeep.Id);
+      if (found.userId != updatedKeep.userId)
+      {
+        throw new Exception("Invalid Request");
+      }
+      found.Views = updatedKeep.Views;
+      found.Shares = updatedKeep.Shares;
+      found.Keeps = updatedKeep.Keeps;
+
+      return _repo.Edit(found);
+    }
+
+    public Keep Delete(int id, string userId)
+    {
+      Keep found = Get(id);
+      if (found.userId != userId)
+      {
+        throw new Exception("Invalid Request");
+      }
+      if (_repo.Delete(id))
+      {
+        return found;
+      }
+      throw new Exception("Something went very wrong");
+    }
+
+  }
 }
