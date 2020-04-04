@@ -23,9 +23,9 @@ namespace Keepr.Services
       return _repo.Create(newKeep);
     }
 
-    public IEnumerable<Keep> GetUserKeeps(string userId)
+    public IEnumerable<Keep> GetUserKeeps(string UserId)
     {
-      return _repo.GetUserKeeps(userId);
+      return _repo.GetUserKeeps(UserId);
     }
 
     public Keep Get(int id)
@@ -38,10 +38,10 @@ namespace Keepr.Services
       return found;
     }
 
-    public Keep Edit(Keepr updatedKeep)
+    public Keep Edit(Keep updatedKeep)
     {
       Keep found = Get(updatedKeep.Id);
-      if (found.userId != updatedKeep.userId)
+      if (found.UserId != updatedKeep.UserId)
       {
         throw new Exception("Invalid Request");
       }
@@ -52,10 +52,10 @@ namespace Keepr.Services
       return _repo.Edit(found);
     }
 
-    public Keep Delete(int id, string userId)
+    public Keep Delete(int id, string UserId)
     {
       Keep found = Get(id);
-      if (found.userId != userId)
+      if (found.UserId != UserId)
       {
         throw new Exception("Invalid Request");
       }

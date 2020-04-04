@@ -30,7 +30,7 @@ namespace Keepr.Controllers
       catch (Exception e)
       {
         return BadRequest(e.Message);
-      };
+      }
     }
 
     [HttpGet("{id}")]
@@ -39,7 +39,7 @@ namespace Keepr.Controllers
       try
       {
         Keep keep = _ks.Get(id);
-        return Ok(blog);
+        return Ok(keep);
       }
       catch (Exception e)
       {
@@ -71,9 +71,9 @@ namespace Keepr.Controllers
       {
         string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         // NOTE DONT TRUST THE USER TO TELL YOU WHO THEY ARE!!!!
-        updatedKeep.userId = userId;
+        updatedKeep.UserId = userId;
         updatedKeep.Id = id;
-        return Ok(_bs.Edit(updatedKeep));
+        return Ok(_ks.Edit(updatedKeep));
       }
       catch (Exception e)
       {
@@ -89,7 +89,7 @@ namespace Keepr.Controllers
       {
         string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         // NOTE DONT TRUST THE USER TO TELL YOU WHO THEY ARE!!!!
-        return Ok(_bs.Delete(id, userId));
+        return Ok(_ks.Delete(id, userId));
       }
       catch (Exception e)
       {

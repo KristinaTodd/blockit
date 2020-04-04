@@ -1,3 +1,4 @@
+USE blockit;
 
 CREATE TABLE vaults (
     id int NOT NULL AUTO_INCREMENT,
