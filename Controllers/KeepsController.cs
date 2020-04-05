@@ -30,7 +30,7 @@ namespace Keepr.Controllers
       catch (Exception e)
       {
         return BadRequest(e.Message);
-      }
+      };
     }
 
     [HttpGet("{id}")]
