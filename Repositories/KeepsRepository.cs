@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Keepr.Models;
 using Dapper;
+using Keepr.Models;
+
 
 namespace Keepr.Repositories
 {
@@ -17,7 +18,7 @@ namespace Keepr.Repositories
 
     internal IEnumerable<Keep> Get()
     {
-      string sql = "SELECT * FROM keeps;";
+      string sql = "SELECT * FROM keeps";
       return _db.Query<Keep>(sql);
     }
 
@@ -35,7 +36,7 @@ namespace Keepr.Repositories
 
     internal Keep Get(int id)
     {
-      string sql = "SELECT * FROM keeps WHERE id = @Id";
+      string sql = "SELECT * FROM keeps WHERE id = @Id LIMIT 1";
       return _db.QueryFirstOrDefault<Keep>(sql, new { Id = id });
     }
 
@@ -50,9 +51,12 @@ namespace Keepr.Repositories
       string sql = @"
         UPDATE keeps
         SET
+            name = @Name,
+            description = @Description,
+            img = @Img,
             views = @Views,
             shares = @Shares,
-            keeps = @Keeps,
+            keeps = @Keeps
         WHERE id = @id
         ";
       _db.Execute(sql, updatedKeep);

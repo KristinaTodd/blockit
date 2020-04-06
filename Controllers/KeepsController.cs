@@ -38,8 +38,8 @@ namespace Keepr.Controllers
     {
       try
       {
-        Keep keep = _ks.Get(id);
-        return Ok(keep);
+        Keep found = _ks.Get(id);
+        return Ok(found);
       }
       catch (Exception e)
       {
@@ -70,7 +70,6 @@ namespace Keepr.Controllers
       try
       {
         string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        // NOTE DONT TRUST THE USER TO TELL YOU WHO THEY ARE!!!!
         updatedKeep.UserId = userId;
         updatedKeep.Id = id;
         return Ok(_ks.Edit(updatedKeep));
