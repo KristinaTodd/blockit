@@ -13,7 +13,7 @@ namespace Keepr.Services
     {
       _repo = repo;
     }
-    public IEnumerable<Keep> Get()
+    internal IEnumerable<Keep> Get()
     {
       return _repo.Get();
     }
