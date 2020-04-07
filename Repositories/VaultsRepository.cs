@@ -17,7 +17,7 @@ namespace Keepr.Repositories
 
     internal IEnumerable<Vault> Get()
     {
-      string sql = "SELECT * FROM Vaults;";
+      string sql = "SELECT * FROM Vaults";
       return _db.Query<Vault>(sql);
     }
 
@@ -25,9 +25,9 @@ namespace Keepr.Repositories
     {
       string sql = @"
             INSERT INTO vaults
-            (name, description)
+            (name, description, userId)
             VALUES
-            (@Name, @Description);
+            (@Name, @Description, @UserId);
             SELECT LAST_INSERT_ID()";
       newVault.Id = _db.ExecuteScalar<int>(sql, newVault);
       return newVault;
@@ -35,7 +35,7 @@ namespace Keepr.Repositories
 
     internal Vault Get(int id)
     {
-      string sql = "SELECT * FROM keeps WHERE id = @Id";
+      string sql = "SELECT * FROM vaults WHERE id = @Id";
       return _db.QueryFirstOrDefault<Vault>(sql, new { Id = id });
     }
 
@@ -61,6 +61,14 @@ namespace Keepr.Repositories
       string sql = "DELETE FROM vaults WHERE id = @Id LIMIT 1";
       int removed = _db.Execute(sql, new { Id });
       return removed == 1;
+    }
+
+    internal IEnumerable<VaultKeepViewModel> GetByVaultId(int VaultId)
+    {
+      string sql = @"
+                SELECT * FROM vaultkeeps
+                WHERE vaultId = @VaultId";
+      return _db.Query<VaultKeepViewModel>(sql, new { VaultId });
     }
   }
 }

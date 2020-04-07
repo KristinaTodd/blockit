@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link class="navbar-brand" :to="{ name: 'home' }">Blocker</router-link>
+    <router-link class="navbar-brand logo" :to="{ name: 'home' }">Blockr</router-link>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -48,4 +48,8 @@
   };
 </script>
 
-<style></style>
+<style>
+  .logo {
+    font-family: 'Bungee', cursive;
+  }
+</style>

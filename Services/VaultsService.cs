@@ -38,6 +38,11 @@ namespace Keepr.Services
       return found;
     }
 
+    internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int vaultId)
+    {
+      return _repo.GetByVaultId(vaultId);
+    }
+
     public Vault Edit(Vault updatedVault)
     {
       Vault found = Get(updatedVault.Id);

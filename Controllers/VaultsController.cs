@@ -47,6 +47,19 @@ namespace Keepr.Controllers
       }
     }
 
+    [HttpGet("{id}/keeps")]
+    public ActionResult<IEnumerable<Keep>> GetKeepsByVaultId(int id)
+    {
+      try
+      {
+        return Ok(_vs.GetKeepsByVaultId(id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
     [HttpPost]
     [Authorize]
     public ActionResult<Vault> Post([FromBody] Vault newVault)
