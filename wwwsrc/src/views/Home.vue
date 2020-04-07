@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="background">
       <div class="cards-column">
-        <div v-for="(keepObj, index) in keeps" :key="keepObj.id" :keepData="keepObj" :keepIndex="index" />
+        <Keep v-for="(keepObj, index) in keeps" :key="keepObj.id" :keepData="keepObj" :keepIndex="index" />
       </div>
     </div>
   </div>
@@ -14,12 +14,9 @@
   export default {
     name: "home",
     mounted() {
-      this.$store.dispatch("getKeeps");
+      return this.$store.dispatch("getKeeps");
     },
     computed: {
-      user() {
-        return this.$store.state.user;
-      },
       keeps() {
         return this.$store.state.publicKeeps;
       }

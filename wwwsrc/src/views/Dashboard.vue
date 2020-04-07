@@ -1,20 +1,20 @@
 <template>
   <div class="dashboard">
-    <h1>WELCOME TO THE DASHBOARD</h1>
-    public {{ publicKeeps }} user {{ userKeeps }}
+    <h1>WELCOME TO YOUR DASHBOARD</h1>
 
     <h3>Add A New Tile</h3>
     <form @submit.prevent="addKeep">
       <div class="row m-2">
         <div class="col">
-          <input type="text" class="form-control" placeholder="Name">
+          <input type="text" class="form-control" v-model="newKeep.name" placeholder="Name" required>
         </div>
         <div class="col">
-          <input type="text" class="form-control" placeholder="Description">
+          <input type="text" class="form-control" v-model="newKeep.description" placeholder="Description" required>
         </div>
         <div class="col">
-          <input type="text" class="form-control" placeholder="Image URL">
+          <input type="text" class="form-control" v-model="newKeep.Img" placeholder="Image URL" required>
         </div>
+        <button type="submit" class="btn btn-success">Create Board</button>
       </div>
     </form>
   </div>
@@ -27,20 +27,21 @@
 
     },
     computed: {
-      user() {
-        return this.$store.state.user;
-      }
+
     },
     methods: {
       addKeep() {
         let data = this.newKeep
-        this.$store.dispatch("addKeep", data);
+        this.$store.dispatch("createKeeps", data);
       }
     },
     data() {
       return {
         newKeep: {
-          userId: this.$store.state.user.userId
+          userId: "",
+          name: "",
+          description: "",
+          img: ""
         }
       }
     }
