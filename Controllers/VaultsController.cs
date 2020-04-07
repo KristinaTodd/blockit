@@ -20,12 +20,12 @@ namespace Keepr.Controllers
     {
       _vs = vs;
     }
-    [HttpGet]
-    public ActionResult<IEnumerable<Vault>> Get()
+    [HttpGet("user/{id}")]
+    public ActionResult<IEnumerable<Vault>> Get(int UserId)
     {
       try
       {
-        return Ok(_vs.Get());
+        return Ok(_vs.Get(UserId));
       }
       catch (Exception e)
       {
@@ -34,11 +34,11 @@ namespace Keepr.Controllers
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Vault> Get(int id)
+    public ActionResult<Vault> GetOne(int id)
     {
       try
       {
-        Vault vault = _vs.Get(id);
+        Vault vault = _vs.GetOne(id);
         return Ok(vault);
       }
       catch (Exception e)

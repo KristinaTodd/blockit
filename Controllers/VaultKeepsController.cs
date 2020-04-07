@@ -22,7 +22,7 @@ namespace Keepr.Controllers
 
     [HttpPost]
     [Authorize]
-    public ActionResult<VaultKeepViewModel> Create([FromBody] VaultKeepViewModel newVaultKeep)
+    public ActionResult<VaultKeep> Create([FromBody] VaultKeep newVaultKeep)
     {
       try
       {
@@ -38,7 +38,7 @@ namespace Keepr.Controllers
 
     [HttpDelete("{id}")]
     [Authorize]
-    public ActionResult<VaultKeepViewModel> Delete(int id)
+    public ActionResult<VaultKeep> Delete(int id)
     {
       try
       {

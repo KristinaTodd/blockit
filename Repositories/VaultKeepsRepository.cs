@@ -14,7 +14,7 @@ namespace Keepr.Repositories
       _db = db;
     }
 
-    internal VaultKeepViewModel Create(VaultKeepViewModel newVaultKeep)
+    internal VaultKeep Create(VaultKeep newVaultKeep)
     {
       string sql = @"
             INSERT INTO vaultkeeps 

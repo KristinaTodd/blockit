@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="home background">
+    <div class="background">
       <div class="cards-column">
         <div v-for="(keepObj, index) in keeps" :key="keepObj.id" :keepData="keepObj" :keepIndex="index" />
       </div>
@@ -14,7 +14,6 @@
   export default {
     name: "home",
     mounted() {
-      debugger
       this.$store.dispatch("getKeeps");
     },
     computed: {

@@ -12,7 +12,7 @@ namespace Keepr.Services
     {
       _repo = repo;
     }
-    internal VaultKeepViewModel Create(VaultKeepViewModel newVaultKeep)
+    internal VaultKeep Create(VaultKeep newVaultKeep)
     {
       return _repo.Create(newVaultKeep);
     }
