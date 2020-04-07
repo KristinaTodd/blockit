@@ -21,11 +21,11 @@ namespace Keepr.Controllers
       _vs = vs;
     }
     [HttpGet("user/{id}")]
-    public ActionResult<IEnumerable<Vault>> Get(int UserId)
+    public ActionResult<IEnumerable<Vault>> Get(string UserId)
     {
       try
       {
-        return Ok(_vs.Get(UserId));
+        return Ok(_vs.GetUserVaults(UserId));
       }
       catch (Exception e)
       {
