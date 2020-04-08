@@ -41,13 +41,6 @@ namespace Keepr.Services
     public Keep Edit(Keep updatedKeep)
     {
       Keep found = Get(updatedKeep.Id);
-      if (found.UserId != updatedKeep.UserId)
-      {
-        throw new Exception("Invalid Request");
-      }
-      found.Name = updatedKeep.Name;
-      found.Description = updatedKeep.Description;
-      found.Img = updatedKeep.Img;
       found.Views = updatedKeep.Views;
       found.Shares = updatedKeep.Shares;
       found.Keeps = updatedKeep.Keeps;

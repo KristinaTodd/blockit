@@ -1,15 +1,16 @@
 <template>
-  <div class="card">
+  <div class="card" @click="setActiveKeep">
     <img :src="this.keepData.img" class="card-img-top img-fluid" />
     <div class="card-body">
-      <h5 class="card-title">{{this.keepData.name}}</h5>
-      <p class="card-text">{{this.keepData.description}}</p>
+      <span class="card-title name text-center">{{this.keepData.name}}</span>
+      <br />
+      <span class="text-center">Views: {{this.keepData.views}} | Blocks: {{this.keepData.keeps}}</span>
     </div>
   </div>
-
 </template>
 
 <script>
+  import router from "../router"
 
   export default {
     name: "Keep",
@@ -19,6 +20,13 @@
         let data = this.$store.state.publicKeeps;
         return data
       }
+    },
+    methods: {
+      setActiveKeep() {
+        this.keepData.views = this.keepData.views + 1;
+        this.$store.dispatch("updateCount", this.keepData);
+        router.push({ name: "TileDetails", params: { keepId: this.keepData.id } });
+      }
     }
 
   }
@@ -27,7 +35,11 @@
 
 <style>
   .card {
-    width: 15rem;
+    margin: .2rem;
+    width: 13rem;
+  }
 
+  .name {
+    font-family: 'Bungee', cursive;
   }
 </style>

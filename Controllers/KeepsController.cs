@@ -47,6 +47,21 @@ namespace Keepr.Controllers
       }
     }
 
+    [HttpGet("mykeeps")]
+    [Authorize]
+    public ActionResult<IEnumerable<Vault>> GetMyKeeps()
+    {
+      try
+      {
+        var currentUser = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_ks.GetUserKeeps(currentUser));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      };
+    }
+
     [HttpPost]
     [Authorize]
     public ActionResult<Keep> Post([FromBody] Keep newKeep)
@@ -64,13 +79,10 @@ namespace Keepr.Controllers
     }
 
     [HttpPut("{id}")]
-    [Authorize]
     public ActionResult<Keep> Edit(int id, [FromBody] Keep updatedKeep)
     {
       try
       {
-        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        updatedKeep.UserId = userId;
         updatedKeep.Id = id;
         return Ok(_ks.Edit(updatedKeep));
       }
@@ -87,7 +99,6 @@ namespace Keepr.Controllers
       try
       {
         string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        // NOTE DONT TRUST THE USER TO TELL YOU WHO THEY ARE!!!!
         return Ok(_ks.Delete(id, userId));
       }
       catch (Exception e)

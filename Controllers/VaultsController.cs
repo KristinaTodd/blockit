@@ -12,7 +12,9 @@ using Microsoft.Extensions.Logging;
 namespace Keepr.Controllers
 {
   [ApiController]
+  [Authorize]
   [Route("api/[controller]")]
+
   public class VaultsController : ControllerBase
   {
     private readonly VaultsService _vs;
@@ -20,12 +22,13 @@ namespace Keepr.Controllers
     {
       _vs = vs;
     }
-    [HttpGet("user/{id}")]
-    public ActionResult<IEnumerable<Vault>> Get(string UserId)
+    [HttpGet("myvaults")]
+    public ActionResult<IEnumerable<Vault>> GetMyVaults()
     {
       try
       {
-        return Ok(_vs.GetUserVaults(UserId));
+        var currentUser = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_vs.GetUserVaults(currentUser));
       }
       catch (Exception e)
       {
@@ -77,14 +80,10 @@ namespace Keepr.Controllers
     }
 
     [HttpPut("{id}")]
-    [Authorize]
     public ActionResult<Vault> Edit(int id, [FromBody] Vault updatedVault)
     {
       try
       {
-        string userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        // NOTE DONT TRUST THE USER TO TELL YOU WHO THEY ARE!!!!
-        updatedVault.UserId = userId;
         updatedVault.Id = id;
         return Ok(_vs.Edit(updatedVault));
       }

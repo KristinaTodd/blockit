@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Vuex from "vuex";
+import Vuex, { Store } from "vuex";
 import Axios from "axios";
 import router from "../router";
 
@@ -19,6 +19,7 @@ export default new Vuex.Store({
   state: {
     publicKeeps: [],
     myVaults: [],
+    myKeeps: [],
     myVaultKeeps: [],
     activeKeep: {},
     activeVault: {}
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     },
     setMyVaults(state, data) {
       state.myVaults = data;
+    },
+    setMyKeeps(state, data) {
+      state.myKeeps = data;
     },
     setMyVaultKeeps(state, data) {
       state.myVaultKeeps = data;
@@ -64,9 +68,11 @@ export default new Vuex.Store({
       let res = await api.get(keep.id)
       commit("setActiveKeep", res.data)
     },
-    async getMyVaults({ commit, dispatch }, profile) {
-      let res = await api.get("vaults/user/" + profile.UserId);
-      commit("setMyVaults", res.data);
+    async getMyStuff({ commit, dispatch }) {
+      let res1 = await api.get("vaults/myvaults")
+      commit("setMyVaults", res1.data);
+      let res2 = await api.get("keeps/mykeeps")
+      commit("setMyKeeps", res2.data);
     },
     async getKeepsByVaultId({ commit, dispatch }, payload) {
       let res = await api.get("vaults/" + payload.id + "/keeps")
@@ -75,7 +81,7 @@ export default new Vuex.Store({
       let res = await api.post("keeps", payload);
       dispatch("getKeeps");
     },
-    async createVaults({ commit, dispatch }, payload) {
+    async createVault({ commit, dispatch }, payload) {
       let res = await api.post("vaults", payload);
       dispatch("getMyVaults");
     },
@@ -83,20 +89,30 @@ export default new Vuex.Store({
       let res = await api.post("vaultkeeps", payload);
       commit("setMyVaultKeeps", res.data);
     },
+    setActiveKeep({ commit, dispatch }, payload) {
+      commit("setActiveKeep", payload)
+    },
+    setActiveVault({ commit, dispatch }, payload) {
+      commit("setActiveVault", payload)
+    },
     async updateKeeps({ commit, dispatch }, payload) {
-      let res = await api.put("keeps/" + payload.Id);
+      let res = await api.put("keeps/" + payload.id);
       dispatch("getKeeps");
+    },
+    async updateCount({ commit, dispatch }, payload) {
+      let res = await api.put("keeps/" + payload.id, payload);
+      dispatch("setActiveKeep", res.data);
     },
     async deleteKeep({ commit, dispatch }, payload) {
       let res = await api.delete("keeps/" + payload.id)
       commit("deleteKeep", res.data)
     },
     async deleteVault({ commit, dispatch }, payload) {
-      let res = await api.delete("vaults/", payload.id)
+      let res = await api.delete("vaults/" + payload.id)
       commit("deleteVault", res.data)
     },
     async removeVaultKeep({ commit, dispatch }, payload) {
-      let res = await api.delete("vaultkeeps/", payload.id)
+      let res = await api.delete("vaultkeeps/" + payload.id)
       commit("removeVaultKeep", res.data)
     }
 

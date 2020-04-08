@@ -15,9 +15,9 @@ namespace Keepr.Repositories
       _db = db;
     }
 
-    internal IEnumerable<Vault> Get(int UserId)
+    internal IEnumerable<Vault> Get(string currentUser)
     {
-      string sql = "SELECT * FROM Vaults WHERE userId = @UserId";
+      string sql = "SELECT * FROM Vaults WHERE currentUser = @UserId";
       return _db.Query<Vault>(sql);
     }
 
@@ -33,7 +33,7 @@ namespace Keepr.Repositories
       return newVault;
     }
 
-    internal Vault GetOne(int id)
+    internal Vault Get(int id)
     {
       string sql = "SELECT * FROM vaults WHERE id = @Id";
       return _db.QueryFirstOrDefault<Vault>(sql, new { Id = id });

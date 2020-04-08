@@ -13,9 +13,9 @@ namespace Keepr.Services
     {
       _repo = repo;
     }
-    internal IEnumerable<Vault> Get(int UserId)
+    internal IEnumerable<Vault> Get(string currentUser)
     {
-      return _repo.Get(UserId);
+      return _repo.Get(currentUser);
     }
 
     public Vault Create(Vault newVault)
@@ -30,7 +30,7 @@ namespace Keepr.Services
 
     public Vault GetOne(int id)
     {
-      Vault found = _repo.GetOne(id);
+      Vault found = _repo.Get(id);
       if (found == null)
       {
         throw new Exception("Invalid Id");
