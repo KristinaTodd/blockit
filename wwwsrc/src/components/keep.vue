@@ -1,10 +1,12 @@
 <template>
-  <div class="card" @click="setActiveKeep">
-    <img :src="this.keepData.img" class="card-img-top img-fluid" />
+  <div class="card">
+    <img :src="this.keepData.img" class="card-img-top img-fluid" @click="setActiveKeep" />
     <div class="card-body">
       <span class="card-title name text-center">{{this.keepData.name}}</span>
       <br />
       <span class="text-center">Views: {{this.keepData.views}} | Blocks: {{this.keepData.keeps}}</span>
+      <br />
+      <button @click="deleteKeep" class="btn btn-danger" v-if="$route.name === 'dashboard'">Delete</button>
     </div>
   </div>
 </template>
@@ -26,6 +28,9 @@
         this.keepData.views = this.keepData.views + 1;
         this.$store.dispatch("updateCount", this.keepData);
         router.push({ name: "TileDetails", params: { keepId: this.keepData.id } });
+      },
+      deleteKeep() {
+        this.$store.dispatch("deleteKeep", this.keepData)
       }
     }
 

@@ -27,8 +27,8 @@ namespace Keepr.Controllers
     {
       try
       {
-        var currentUser = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        return Ok(_vs.GetUserVaults(currentUser));
+        var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_vs.GetUserVaults(userId));
       }
       catch (Exception e)
       {

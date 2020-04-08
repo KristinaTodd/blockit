@@ -79,11 +79,11 @@ export default new Vuex.Store({
     },
     async createKeeps({ commit, dispatch }, payload) {
       let res = await api.post("keeps", payload);
-      dispatch("getKeeps");
+      dispatch("getMyStuff");
     },
     async createVault({ commit, dispatch }, payload) {
       let res = await api.post("vaults", payload);
-      dispatch("getMyVaults");
+      dispatch("getMyStuff");
     },
     async createVaultKeeps({ commit, dispatch }, payload) {
       let res = await api.post("vaultkeeps", payload);
@@ -106,10 +106,12 @@ export default new Vuex.Store({
     async deleteKeep({ commit, dispatch }, payload) {
       let res = await api.delete("keeps/" + payload.id)
       commit("deleteKeep", res.data)
+      dispatch("getMyStuff");
     },
     async deleteVault({ commit, dispatch }, payload) {
       let res = await api.delete("vaults/" + payload.id)
       commit("deleteVault", res.data)
+      dispatch("getMyStuff");
     },
     async removeVaultKeep({ commit, dispatch }, payload) {
       let res = await api.delete("vaultkeeps/" + payload.id)

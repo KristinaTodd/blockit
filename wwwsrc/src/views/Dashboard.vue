@@ -60,8 +60,10 @@
   import Keep from "../components/keep"
   export default {
     name: "Dashboard",
-    mounted() {
-      return this.$store.dispatch("getMyStuff")
+    async mounted() {
+      if (await this.$auth.isAuthenticated) {
+        return this.$store.dispatch("getMyStuff")
+      }
     },
     computed: {
       vaults() {

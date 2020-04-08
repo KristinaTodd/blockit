@@ -1,7 +1,7 @@
 <template>
   <div class="card" @click="setActiveVault">
-    <div class="card-body">
-      <span class="card-title name text-center">{{this.VaultData.name}}</span>
+    <div class="card-body text-center">
+      <span class="card-title name text-center">{{this.vaultData.name}}</span>
       <br />
       <span class="text-center">{{this.vaultData.description}}</span>
     </div>
