@@ -1,12 +1,11 @@
 <template>
   <div class="card">
-    <img :src="this.keepData.img" class="card-img-top img-fluid onclick-attr" @click="setActiveKeep" />
+    <img :src="this.vaultKeepData.img" class="card-img-top img-fluid onclick-attr" @click="setActiveKeep" />
     <div class="card-body">
-      <span class="card-title name text-center">{{this.keepData.name}}</span>
+      <span class="card-title name text-center">{{this.vaultKeepData.name}}</span>
       <br />
-      <span class="text-center">Views: {{this.keepData.views}} | Blocks: {{this.keepData.keeps}}</span>
-      <br />
-      <button @click="deleteKeep" class="btn btn-danger" v-if="$route.name === 'dashboard'">Delete</button>
+      <button @click="deleteVaultKeep" class="btn btn-danger" v-if="$route.name === 'BlockDetails'">Remove From
+        Block</button>
     </div>
   </div>
 </template>
@@ -15,11 +14,11 @@
   import router from "../router"
 
   export default {
-    name: "Keep",
-    props: ["keepData", "keepIndex"],
+    name: "VaultKeep",
+    props: ["vaultKeepData", "vaultKeepIndex"],
     computed: {
-      keeps() {
-        let data = this.$store.state.publicKeeps;
+      vaultKeeps() {
+        let data = this.$store.state.myVaultKeeps;
         return data
       }
     },
@@ -29,8 +28,8 @@
         this.$store.dispatch("updateCount", this.keepData);
         router.push({ name: "TileDetails", params: { keepId: this.keepData.id } });
       },
-      deleteKeep() {
-        this.$store.dispatch("deleteKeep", this.keepData)
+      deleteVaultKeep() {
+        this.$store.dispatch("deleteVaultKeep", this.vaultKeepData)
       }
     }
 

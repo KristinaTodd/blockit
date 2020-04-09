@@ -1,5 +1,5 @@
 <template>
-  <div class="card" @click="setActiveVault">
+  <div class="card onclick-attr" @click="setActiveVault">
     <div class="card-body text-center">
       <span class="card-title name text-center">{{this.vaultData.name}}</span>
       <br />
@@ -9,6 +9,7 @@
 </template>
 
 <script>
+  import router from "../router"
 
   export default {
     name: "Vault",
@@ -22,6 +23,7 @@
     methods: {
       setActiveVault() {
         this.$store.dispatch("setActiveVault", this.vaultData);
+        router.push({ name: "BlockDetails", params: { vaultId: this.vaultData.id } });
       }
     }
 
@@ -37,5 +39,9 @@
 
   .name {
     font-family: 'Bungee', cursive;
+  }
+
+  .onclick-attr {
+    cursor: pointer;
   }
 </style>

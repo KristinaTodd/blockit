@@ -41,7 +41,8 @@ namespace Keepr.Controllers
     {
       try
       {
-        Vault vault = _vs.GetOne(id);
+        var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        Vault vault = _vs.GetOne(id, userId);
         return Ok(vault);
       }
       catch (Exception e)
@@ -55,7 +56,8 @@ namespace Keepr.Controllers
     {
       try
       {
-        return Ok(_vs.GetKeepsByVaultId(id));
+        var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        return Ok(_vs.GetKeepsByVaultId(id, userId));
       }
       catch (Exception e)
       {

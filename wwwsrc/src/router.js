@@ -6,6 +6,8 @@ import Home from "./views/Home.vue";
 import Dashboard from "./views/Dashboard.vue";
 // @ts-ignore
 import TileDetails from "./views/TileDetails.vue";
+// @ts-ignore
+import BlockDetails from "./views/BlockDetails.vue";
 import { authGuard } from "@bcwdev/auth0-vue";
 
 Vue.use(Router);
@@ -27,6 +29,12 @@ export default new Router({
       path: "/:keepId",
       name: "TileDetails",
       component: TileDetails
+    },
+    {
+      path: "/:vaultId",
+      name: "BlockDetails",
+      component: BlockDetails,
+      beforeEnter: authGuard
     }
   ]
 });

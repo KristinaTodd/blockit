@@ -22,7 +22,8 @@ export default new Vuex.Store({
     myKeeps: [],
     myVaultKeeps: [],
     activeKeep: {},
-    activeVault: {}
+    activeVault: {},
+    tempVault: {}
   },
   mutations: {
     setPublicKeeps(state, keeps) {
@@ -42,6 +43,9 @@ export default new Vuex.Store({
     },
     setActiveVault(state, data) {
       state.activeVault = data;
+    },
+    setTempVault(state, data) {
+      state.tempVault = data;
     },
     deleteKeep(state, data) {
       state.publicKeeps = state.publicKeeps.filter(k => k.id != data.id)
@@ -74,8 +78,9 @@ export default new Vuex.Store({
       let res2 = await api.get("keeps/mykeeps")
       commit("setMyKeeps", res2.data);
     },
-    async getKeepsByVaultId({ commit, dispatch }, payload) {
-      let res = await api.get("vaults/" + payload.id + "/keeps")
+    async getKeepsByVaultId({ commit, dispatch }, vaultId) {
+      let res = await api.get("vaults/" + vaultId + "/keeps")
+      commit("setMyVaultKeeps", res.data);
     },
     async createKeeps({ commit, dispatch }, payload) {
       let res = await api.post("keeps", payload);
@@ -85,15 +90,17 @@ export default new Vuex.Store({
       let res = await api.post("vaults", payload);
       dispatch("getMyStuff");
     },
-    async createVaultKeeps({ commit, dispatch }, payload) {
+    async createVaultKeep({ commit, dispatch }, payload) {
       let res = await api.post("vaultkeeps", payload);
-      commit("setMyVaultKeeps", res.data);
     },
     setActiveKeep({ commit, dispatch }, payload) {
       commit("setActiveKeep", payload)
     },
     setActiveVault({ commit, dispatch }, payload) {
       commit("setActiveVault", payload)
+    },
+    setTempVault({ commit, dispatch }, payload) {
+      commit("setTempVault", payload)
     },
     async updateKeeps({ commit, dispatch }, payload) {
       let res = await api.put("keeps/" + payload.id);
@@ -102,6 +109,7 @@ export default new Vuex.Store({
     async updateCount({ commit, dispatch }, payload) {
       let res = await api.put("keeps/" + payload.id, payload);
       dispatch("setActiveKeep", res.data);
+      dispatch("getKeeps");
     },
     async deleteKeep({ commit, dispatch }, payload) {
       let res = await api.delete("keeps/" + payload.id)
@@ -113,8 +121,9 @@ export default new Vuex.Store({
       commit("deleteVault", res.data)
       dispatch("getMyStuff");
     },
-    async removeVaultKeep({ commit, dispatch }, payload) {
-      let res = await api.delete("vaultkeeps/" + payload.id)
+    async deleteVaultKeep({ commit, dispatch }, payload) {
+
+      let res = await api.delete("vaultkeeps/" + payload.vaultKeepId)
       commit("removeVaultKeep", res.data)
     }
 

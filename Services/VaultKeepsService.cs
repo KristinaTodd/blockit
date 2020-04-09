@@ -17,16 +17,16 @@ namespace Keepr.Services
       return _repo.Create(newVaultKeep);
     }
 
-    internal VaultKeepViewModel Delete(int id, string UserId)
+    internal string Delete(int id, string UserId)
     {
-      VaultKeepViewModel found = _repo.Get(id);
+      var found = _repo.Get(id);
       if (found.UserId != UserId)
       {
         throw new UnauthorizedAccessException("Invalid Request");
       }
       if (_repo.Delete(id))
       {
-        return found;
+        return "Deleted";
       }
       throw new Exception("Something went terribly wrong");
     }

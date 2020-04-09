@@ -26,10 +26,10 @@ namespace Keepr.Repositories
       return newVaultKeep;
     }
 
-    internal VaultKeepViewModel Get(int Id)
+    internal VaultKeep Get(int Id)
     {
       string sql = "SELECT * FROM vaultkeeps WHERE id = @Id";
-      return _db.QueryFirstOrDefault<VaultKeepViewModel>(sql, new { Id });
+      return _db.QueryFirstOrDefault<VaultKeep>(sql, new { Id });
     }
 
     internal bool Delete(int Id)
