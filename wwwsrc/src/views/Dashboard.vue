@@ -1,11 +1,11 @@
 <template>
-  <div class="dashboard">
+  <div class="dashboard container-fluid">
     <div class="row">
       <div class="col-12 text-center">
-        <h1>WELCOME TO YOUR DASHBOARD</h1>
+        <h1 class="heading">WELCOME TO YOUR DASHBOARD</h1>
       </div>
       <div class="col-12 text-center">
-        <h3>Add A New Tile</h3>
+        <h3 class="heading">Add A New Tile</h3>
         <form @submit.prevent="addKeep">
           <div class="row m-2">
             <div class="col">
@@ -22,7 +22,7 @@
         </form>
       </div>
       <div class="col-12 text-center">
-        <h3>Add A New Block</h3>
+        <h3 class="heading">Add A New Block</h3>
         <form @submit.prevent="addVault">
           <div class="row m-2">
             <div class="col">
@@ -38,7 +38,7 @@
     </div>
     <div class="row">
       <div class="col-12 text-center">
-        <h3>Here Are Your Blocks</h3>
+        <h3 class="heading">Here Are Your Blocks</h3>
       </div>
       <div class="cards-column ">
         <Vault v-for="(vaultObj, index) in vaults" :key="vaultObj.id" :vaultData="vaultObj" :vaultIndex="index" />
@@ -46,7 +46,7 @@
     </div>
     <div class="row">
       <div class="col-12 text-center">
-        <h3>Here Are Your Tiles</h3>
+        <h3 class="heading">Here Are Your Tiles</h3>
       </div>
       <div class="cards-column ">
         <Keep v-for="(keepObj, index) in keeps" :key="keepObj.id" :keepData="keepObj" :keepIndex="index" />
@@ -111,5 +111,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .heading {
+    font-family: 'Bungee', cursive;
   }
 </style>
