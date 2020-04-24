@@ -115,5 +115,8 @@
 
   .heading {
     font-family: 'Bungee', cursive;
+    color: teal;
+    margin-top: 3rem;
+    background-color: white;
   }
 </style>

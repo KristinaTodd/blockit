@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card text-center">
     <img :src="this.vaultKeepData.img" class="card-img-top img-fluid onclick-attr" @click="setActiveKeep" />
     <div class="card-body">
       <span class="card-title name text-center">{{this.vaultKeepData.name}}</span>

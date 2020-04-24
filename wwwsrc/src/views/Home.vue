@@ -35,14 +35,9 @@
 </script>
 
 <style>
-  .background {
-    background-color: lightgrey;
-  }
-
   .cards-column {
     column-count: 4;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
   }
 </style>

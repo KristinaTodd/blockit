@@ -1,8 +1,8 @@
 <template>
-  <div class="card">
+  <div class="card ">
     <img :src="this.keepData.img" class="card-img-top img-fluid onclick-attr" @click="setActiveKeep" />
     <div class="card-body">
-      <span class="card-title name text-center">{{this.keepData.name}}</span>
+      <span class="card-title name ">{{this.keepData.name}}</span>
       <br />
       <span class="text-center">Views: {{this.keepData.views}} | Blocks: {{this.keepData.keeps}}</span>
       <br />
@@ -43,6 +43,7 @@
     margin: .2rem;
     width: 13rem;
   }
+
 
   .name {
     font-family: 'Bungee', cursive;
