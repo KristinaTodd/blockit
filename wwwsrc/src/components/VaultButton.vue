@@ -1,6 +1,6 @@
 <template>
   <div class="col-12">
-    <button class="btn btn-danger" @click="setTempVault">
+    <button class="btn btn-danger" @click="setTempVault" :id="'#buttonActive' + this.vaultData.id">
       {{this.vaultData.name}}
     </button>
   </div>
@@ -20,6 +20,7 @@
     methods: {
       setTempVault() {
         this.$store.dispatch("setTempVault", this.vaultData);
+        $('#buttonActive' + this.vaultData.id).addClass("activeButton");
       }
     }
 
@@ -35,5 +36,15 @@
 
   .name {
     font-family: 'Bungee', cursive;
+  }
+
+  .activeButton {
+    background-color: green;
+    border: green;
+  }
+
+  .activeButton:active {
+    background-color: green;
+    border: green;
   }
 </style>

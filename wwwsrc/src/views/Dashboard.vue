@@ -75,7 +75,6 @@
       addKeep() {
         let data = this.newKeep
         this.$store.dispatch("createKeeps", data);
-        this.form.text = ""
       },
       addVault() {
         let data = this.newVault
