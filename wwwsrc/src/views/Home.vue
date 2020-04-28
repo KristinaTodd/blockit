@@ -2,9 +2,7 @@
   <div class="container-fluid">
     <div class="background">
       <div class="row">
-        <div class="cards-column ">
-          <Keep v-for="(keepObj, index) in keeps" :key="keepObj.id" :keepData="keepObj" :keepIndex="index" />
-        </div>
+        <Keep v-for="(keepObj, index) in keeps" :key="keepObj.id" :keepData="keepObj" :keepIndex="index" />
       </div>
     </div>
   </div>
@@ -35,9 +33,4 @@
 </script>
 
 <style>
-  .cards-column {
-    column-count: 4;
-    display: flex;
-    flex-wrap: wrap;
-  }
 </style>

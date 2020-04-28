@@ -48,9 +48,7 @@
       <div class="col-12 text-center">
         <h3 class="heading">Here Are Your Tiles</h3>
       </div>
-      <div class="cards-column ">
-        <Keep v-for="(keepObj, index) in keeps" :key="keepObj.id" :keepData="keepObj" :keepIndex="index" />
-      </div>
+      <Keep v-for="(keepObj, index) in keeps" :key="keepObj.id" :keepData="keepObj" :keepIndex="index" />
     </div>
   </div>
 </template>
@@ -77,6 +75,7 @@
       addKeep() {
         let data = this.newKeep
         this.$store.dispatch("createKeeps", data);
+        this.form.text = ""
       },
       addVault() {
         let data = this.newVault

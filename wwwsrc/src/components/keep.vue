@@ -1,12 +1,14 @@
 <template>
-  <div class="card ">
-    <img :src="this.keepData.img" class="card-img-top img-fluid onclick-attr" @click="setActiveKeep" />
-    <div class="card-body">
-      <span class="card-title name ">{{this.keepData.name}}</span>
-      <br />
-      <span class="text-center">Views: {{this.keepData.views}} | Blocks: {{this.keepData.keeps}}</span>
-      <br />
-      <button @click="deleteKeep" class="btn btn-danger" v-if="$route.name === 'dashboard'">Delete</button>
+  <div class="col-3 justify-content-center d-flex">
+    <div class="card text-center">
+      <img :src="this.keepData.img" class="card-img-top img-fluid onclick-attr" @click="setActiveKeep" />
+      <div class="card-body">
+        <span class="card-title name ">{{this.keepData.name}}</span>
+        <br />
+        <span class="">Views: {{this.keepData.views}} | Blocks: {{this.keepData.keeps}}</span>
+        <br />
+        <button @click="deleteKeep" class="btn btn-danger" v-if="$route.name === 'dashboard'">Delete</button>
+      </div>
     </div>
   </div>
 </template>
@@ -33,7 +35,6 @@
         this.$store.dispatch("deleteKeep", this.keepData)
       }
     }
-
   }
 
 </script>
@@ -41,9 +42,12 @@
 <style>
   .card {
     margin: .2rem;
-    width: 13rem;
+    height: fit-content;
   }
 
+  .card-img-top {
+    width: 13rem;
+  }
 
   .name {
     font-family: 'Bungee', cursive;
