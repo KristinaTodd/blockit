@@ -5,7 +5,7 @@
       <div class="card-body">
         <span class="card-title name ">{{this.keepData.name}}</span>
         <br />
-        <span class="">Views: {{this.keepData.views}} | Blocks: {{this.keepData.keeps}}</span>
+        <span class="description">Views: {{this.keepData.views}} | Blocks: {{this.keepData.keeps}}</span>
         <br />
         <button @click="deleteKeep" class="btn btn-danger" v-if="$route.name === 'dashboard'">Delete</button>
       </div>
@@ -55,5 +55,9 @@
 
   .onclick-attr {
     cursor: pointer;
+  }
+
+  .description {
+    font-family: 'Antic', sans-serif;
   }
 </style>

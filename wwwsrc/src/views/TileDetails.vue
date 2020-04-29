@@ -5,10 +5,10 @@
         <h3 class="name">{{this.keep.name}}</h3>
       </div>
       <div class="col-12 text-center"><img :src="this.keep.img" class="image"></div>
-      <div class="col-12 text-center pt-2"><span>{{this.keep.description}}</span></div>
+      <div class="col-12 text-center p-2 description"><span>{{this.keep.description}}</span></div>
       <div class="col-12 text-center" v-if="this.$auth.isAuthenticated">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newVaultKeep">
+        <button type="button" class="btn btn-custom" data-toggle="modal" data-target="#newVaultKeep">
           Add Tile to Block
         </button>
 
@@ -92,5 +92,15 @@
 
   .name {
     font-family: 'Bungee', cursive;
+  }
+
+  .btn-custom {
+    background-color: indigo;
+    color: white;
+    font-family: 'Antic', sans-serif;
+  }
+
+  .description {
+    font-family: 'Antic', sans-serif;
   }
 </style>

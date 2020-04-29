@@ -3,7 +3,7 @@
     <div class="card-body text-center">
       <span class="card-title name text-center">{{this.vaultData.name}}</span>
       <br />
-      <span class="text-center">{{this.vaultData.description}}</span>
+      <span class="text-center description">{{this.vaultData.description}}</span>
     </div>
   </div>
 </template>
@@ -43,5 +43,9 @@
 
   .onclick-attr {
     cursor: pointer;
+  }
+
+  .description {
+    font-family: 'Antic', sans-serif;
   }
 </style>

@@ -4,27 +4,11 @@
       <div class="col-12 text-center">
         <h1 class="heading">WELCOME TO YOUR DASHBOARD</h1>
       </div>
-      <div class="col-12 text-center">
-        <h3 class="heading">Add A New Tile</h3>
-        <form @submit.prevent="addKeep">
-          <div class="row m-2">
-            <div class="col">
-              <input type="text" class="form-control" v-model="newKeep.name" placeholder="Name" required>
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" v-model="newKeep.description" placeholder="Description" required>
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" v-model="newKeep.Img" placeholder="Image URL" required>
-            </div>
-            <button type="submit" class="btn btn-success">Create Tile</button>
-          </div>
-        </form>
-      </div>
+
       <div class="col-12 text-center">
         <h3 class="heading">Add A New Block</h3>
         <form @submit.prevent="addVault">
-          <div class="row m-2">
+          <div class="row m-2 description">
             <div class="col">
               <input type="text" class="form-control" v-model="newVault.name" placeholder="Name" required>
             </div>
@@ -38,15 +22,32 @@
     </div>
     <div class="row">
       <div class="col-12 text-center">
-        <h3 class="heading">Here Are Your Blocks</h3>
+        <h3 class="heading">Your Blocks</h3>
       </div>
       <div class="cards-column ">
         <Vault v-for="(vaultObj, index) in vaults" :key="vaultObj.id" :vaultData="vaultObj" :vaultIndex="index" />
       </div>
     </div>
+    <div class="col-12 text-center">
+      <h3 class="heading">Add A New Tile</h3>
+      <form @submit.prevent="addKeep">
+        <div class="row m-2 description">
+          <div class="col">
+            <input type="text" class="form-control" v-model="newKeep.name" placeholder="Name" required>
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" v-model="newKeep.description" placeholder="Description" required>
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" v-model="newKeep.Img" placeholder="Image URL" required>
+          </div>
+          <button type="submit" class="btn btn-success">Create Tile</button>
+        </div>
+      </form>
+    </div>
     <div class="row">
       <div class="col-12 text-center">
-        <h3 class="heading">Here Are Your Tiles</h3>
+        <h3 class="heading">Your Tiles</h3>
       </div>
       <Keep v-for="(keepObj, index) in keeps" :key="keepObj.id" :keepData="keepObj" :keepIndex="index" />
     </div>
@@ -116,5 +117,9 @@
     color: teal;
     margin-top: 3rem;
     background-color: white;
+  }
+
+  .description {
+    font-family: 'Antic', sans-serif;
   }
 </style>

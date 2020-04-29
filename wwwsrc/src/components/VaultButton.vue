@@ -1,6 +1,6 @@
 <template>
   <div class="col-12">
-    <button class="btn btn-danger" @click="setTempVault" :id="'#buttonActive' + this.vaultData.id">
+    <button class="btn btn-danger m-1" @click="setTempVault" :id="'#buttonActive' + this.vaultData.id">
       {{this.vaultData.name}}
     </button>
   </div>
@@ -29,11 +29,6 @@
 </script>
 
 <style>
-  .card {
-    margin: .2rem;
-    width: 13rem;
-  }
-
   .name {
     font-family: 'Bungee', cursive;
   }

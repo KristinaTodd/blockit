@@ -4,7 +4,7 @@
       <div class="col-12 text-center">
         <h3 class="name">{{this.vault.name}}</h3>
       </div>
-      <div class="col-12 text-center pt-2"><span>{{this.vault.description}}</span></div>
+      <div class="col-12 text-center p-2 description"><span>{{this.vault.description}}</span></div>
       <div class="col-12 text-center">
         <button class="btn btn-danger" @click="deleteBlock">Delete This Block</button>
       </div>
@@ -58,5 +58,9 @@
 
   .name {
     font-family: 'Bungee', cursive;
+  }
+
+  .description {
+    font-family: 'Antic', sans-serif;
   }
 </style>

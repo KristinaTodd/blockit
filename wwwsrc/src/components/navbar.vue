@@ -6,7 +6,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto secondFont">
         <li class="nav-item" :class="{ active: $route.name == 'home' }">
           <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link>
         </li>
@@ -15,10 +15,10 @@
         </li>
       </ul>
       <span class="navbar-text">
-        <button class="btn btn-success" @click="login" v-if="!$auth.isAuthenticated">
+        <button class="btn btn-success secondFont" @click="login" v-if="!$auth.isAuthenticated">
           Login
         </button>
-        <button class="btn btn-danger" @click="logout" v-else>logout</button>
+        <button class="btn btn-danger secondFont" @click="logout" v-else>logout</button>
       </span>
     </div>
   </nav>
@@ -56,5 +56,10 @@
 
   .fas {
     color: teal;
+  }
+
+  .secondFont {
+    font-family: 'Antic', sans-serif;
+
   }
 </style>
