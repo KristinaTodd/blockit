@@ -15,7 +15,7 @@
             <div class="col">
               <input type="text" class="form-control" v-model="newVault.description" placeholder="Description" required>
             </div>
-            <button type="submit" class="btn btn-success">Create Block</button>
+            <button type="submit" class="btn checkmark pt-0"><i class="fas fa-check-square"></i></button>
           </div>
         </form>
       </div>
@@ -41,7 +41,7 @@
           <div class="col">
             <input type="text" class="form-control" v-model="newKeep.Img" placeholder="Image URL" required>
           </div>
-          <button type="submit" class="btn btn-success">Create Tile</button>
+          <button type="submit" class="btn checkmark pt-0"><i class="fas fa-check-square"></i></button>
         </div>
       </form>
     </div>
@@ -121,5 +121,10 @@
 
   .description {
     font-family: 'Antic', sans-serif;
+  }
+
+  .checkmark {
+    font-size: x-large;
+    padding: none !important;
   }
 </style>

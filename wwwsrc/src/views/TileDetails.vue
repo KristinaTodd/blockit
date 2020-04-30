@@ -30,8 +30,8 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                  @click="createVaultKeep">Done</button>
+                <button type="button" class="btn" data-dismiss="modal" @click="createVaultKeep"><i
+                    class="fas fa-check-square"></i></button>
               </div>
             </div>
           </div>
