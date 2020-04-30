@@ -10,12 +10,26 @@
         <form @submit.prevent="addVault">
           <div class="row m-2 description">
             <div class="col">
-              <input type="text" class="form-control" v-model="newVault.name" placeholder="Name" required>
+              <input
+                type="text"
+                class="form-control"
+                v-model="newVault.name"
+                placeholder="Name"
+                required
+              />
             </div>
             <div class="col">
-              <input type="text" class="form-control" v-model="newVault.description" placeholder="Description" required>
+              <input
+                type="text"
+                class="form-control"
+                v-model="newVault.description"
+                placeholder="Description"
+                required
+              />
             </div>
-            <button type="submit" class="btn checkmark pt-0"><i class="fas fa-check-square"></i></button>
+            <button type="submit" class="btn checkmark pt-0">
+              <i class="fas fa-check-square"></i>
+            </button>
           </div>
         </form>
       </div>
@@ -24,8 +38,13 @@
       <div class="col-12 text-center">
         <h3 class="heading">Your Blocks</h3>
       </div>
-      <div class="cards-column ">
-        <Vault v-for="(vaultObj, index) in vaults" :key="vaultObj.id" :vaultData="vaultObj" :vaultIndex="index" />
+      <div class="cards-column text-center">
+        <Vault
+          v-for="(vaultObj, index) in vaults"
+          :key="vaultObj.id"
+          :vaultData="vaultObj"
+          :vaultIndex="index"
+        />
       </div>
     </div>
     <div class="col-12 text-center">
@@ -33,15 +52,35 @@
       <form @submit.prevent="addKeep">
         <div class="row m-2 description">
           <div class="col">
-            <input type="text" class="form-control" v-model="newKeep.name" placeholder="Name" required>
+            <input
+              type="text"
+              class="form-control"
+              v-model="newKeep.name"
+              placeholder="Name"
+              required
+            />
           </div>
           <div class="col">
-            <input type="text" class="form-control" v-model="newKeep.description" placeholder="Description" required>
+            <input
+              type="text"
+              class="form-control"
+              v-model="newKeep.description"
+              placeholder="Description"
+              required
+            />
           </div>
           <div class="col">
-            <input type="text" class="form-control" v-model="newKeep.Img" placeholder="Image URL" required>
+            <input
+              type="text"
+              class="form-control"
+              v-model="newKeep.Img"
+              placeholder="Image URL"
+              required
+            />
           </div>
-          <button type="submit" class="btn checkmark pt-0"><i class="fas fa-check-square"></i></button>
+          <button type="submit" class="btn checkmark pt-0">
+            <i class="fas fa-check-square"></i>
+          </button>
         </div>
       </form>
     </div>
@@ -49,82 +88,87 @@
       <div class="col-12 text-center">
         <h3 class="heading">Your Tiles</h3>
       </div>
-      <Keep v-for="(keepObj, index) in keeps" :key="keepObj.id" :keepData="keepObj" :keepIndex="index" />
+      <Keep
+        v-for="(keepObj, index) in keeps"
+        :key="keepObj.id"
+        :keepData="keepObj"
+        :keepIndex="index"
+      />
     </div>
   </div>
 </template>
 
 <script>
-  import Vault from "../components/vault";
-  import Keep from "../components/keep"
-  export default {
-    name: "Dashboard",
-    async mounted() {
-      if (await this.$auth.isAuthenticated) {
-        return this.$store.dispatch("getMyStuff")
-      }
-    },
-    computed: {
-      vaults() {
-        return this.$store.state.myVaults
-      },
-      keeps() {
-        return this.$store.state.myKeeps
-      }
-    },
-    methods: {
-      addKeep() {
-        let data = this.newKeep
-        this.$store.dispatch("createKeeps", data);
-      },
-      addVault() {
-        let data = this.newVault
-        this.$store.dispatch("createVault", data)
-      }
-    },
-    data() {
-      return {
-        newKeep: {
-          userId: "",
-          name: "",
-          description: "",
-          img: ""
-        },
-        newVault: {
-          userId: "",
-          name: "",
-          description: ""
-        }
-      }
-    },
-    components: {
-      Keep,
-      Vault
+import Vault from "../components/vault";
+import Keep from "../components/keep";
+export default {
+  name: "Dashboard",
+  async mounted() {
+    if (await this.$auth.isAuthenticated) {
+      return this.$store.dispatch("getMyStuff");
     }
-  };
+  },
+  computed: {
+    vaults() {
+      return this.$store.state.myVaults;
+    },
+    keeps() {
+      return this.$store.state.myKeeps;
+    },
+  },
+  methods: {
+    addKeep() {
+      let data = this.newKeep;
+      this.$store.dispatch("createKeeps", data);
+    },
+    addVault() {
+      let data = this.newVault;
+      this.$store.dispatch("createVault", data);
+    },
+  },
+  data() {
+    return {
+      newKeep: {
+        userId: "",
+        name: "",
+        description: "",
+        img: "",
+      },
+      newVault: {
+        userId: "",
+        name: "",
+        description: "",
+      },
+    };
+  },
+  components: {
+    Keep,
+    Vault,
+  },
+};
 </script>
 
 <style>
-  .cards-column {
-    column-count: 4;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+.cards-column {
+  column-count: 4;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-  .heading {
-    font-family: 'Bungee', cursive;
-    color: teal;
-    margin-top: 3rem;
-    background-color: white;
-  }
+.heading {
+  font-family: "Bungee", cursive;
+  color: teal;
+  margin-top: 3rem;
+  background-color: white;
+}
 
-  .description {
-    font-family: 'Antic', sans-serif;
-  }
+.description {
+  font-family: "Antic", sans-serif;
+}
 
-  .checkmark {
-    font-size: x-large;
-    padding: none !important;
-  }
+.checkmark {
+  font-size: x-large;
+  padding: none !important;
+}
 </style>
